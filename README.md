@@ -10,4 +10,5 @@ Then look under resources/static/js to find the JavaScript files, or look under 
 <h1>Practice Pages</h1>
 <ul>
   <li>Tic Tac Toe</li>
+  <li>Minesweeper <i>(not finished)</i></li>
 </ul>
