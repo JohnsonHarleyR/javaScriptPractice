@@ -1,7 +1,6 @@
 # javaScriptPractice
 Practice as I teach myself JavaScript.
-
-<br><br>
+<br>
 More will probably come in the future!
 
 
