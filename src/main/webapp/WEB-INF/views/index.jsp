@@ -25,7 +25,7 @@
 <!-- MainBody -->
 <main class="container">
 
-<h1>Practicing with Java</h1>
+<h1>Practicing with JavaScript</h1>
 <p>
 Click these links to see different practice projects.
 </p>
