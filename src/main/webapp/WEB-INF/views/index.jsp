@@ -27,9 +27,13 @@
 
 <h1>Practicing with JavaScript</h1>
 <p>
-Click these links to see different practice projects.
+<i><sup>All projects are created by Harley Johnson. 
+(<a href="https://www.linkedin.com/in/johnsonharleyr">LinkedIn</a> / 
+<a href="https://github.com/JohnsonHarleyR">GitHub</a>)</sup></i>
 </p>
 
+
+Click these links to see different practice projects:
 <ul>
 	<li><a href="/TicTacToe">Tic Tac Toe</a></li>
 	<li><a href="/Minesweeper">Minesweeper</a> <i>(not finished)</i></li>
