@@ -1,9 +1,9 @@
 
 
-//TODO function for when an item on grid is clicked
+//Function for when an item on grid is clicked
 function clickSquare() {
 	
-	//check state of square, only do it if it's black
+	//check state of square, only do it if it's blank
 	if (this.state === 0 && msgState === 0) {
 		if (turn === 1) {
 			this.src = "xSquare.png";
@@ -83,7 +83,7 @@ function checkWinner() {
 }
 
 
-//TODO function that resets the game
+//function that resets the game
 function resetGame() {
 	
 	
@@ -117,7 +117,7 @@ function resetGame() {
 	message.className = "def";
 }
 
-//TODO function that changes image based on state
+//function that changes image based on state
 function changeStates() {
 	
 	//update square images
