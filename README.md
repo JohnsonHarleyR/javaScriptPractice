@@ -1,4 +1,4 @@
-# javaScriptPractice
+# JavaScript Practice
 Practice as I teach myself JavaScript.
 <br><br>
 <b>More will probably come in the future!</b>
