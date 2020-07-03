@@ -1,6 +1,6 @@
 # JavaScript Practice
 Practice as I teach myself JavaScript.
-<br>
+<br><br>
 The important files can be found here: javaScriptPractice/src/main/
 <br><br>
 <b>More will probably come in the future!</b>
