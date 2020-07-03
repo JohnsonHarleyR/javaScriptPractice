@@ -1,8 +1,9 @@
 # JavaScript Practice
 Practice as I teach myself JavaScript.
 <br><br>
-The important files can be found by navigating to src and then main.<br>
-Then look under resources/static/js to find the JavaScript, or webapp/WEB-INF/views to find the HTML/JSP page.
+The important files can be found by navigating to src/main/.<br>
+Then look under resources/static/js to find the JavaScript.<br>
+Look underwebapp/WEB-INF/views to find the HTML/JSP pages.
 <br><br>
 <b>More will probably come in the future!</b>
 
