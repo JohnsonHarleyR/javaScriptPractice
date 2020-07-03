@@ -1,16 +1,14 @@
-
-
-//TODO function for when an item on grid is clicked
+//Function for when an item on grid is clicked
 function clickSquare() {
 	
-	//check state of square, only do it if it's black
+	//check state of square, only do it if it's blank
 	if (this.state === 0 && msgState === 0) {
 		if (turn === 1) {
-			this.src = "xSquare.png";
+			this.src = "ttt/xSquare.png";
 			this.state = 1;
 			turn = 2;
 		} else if (turn === 2) {
-			this.src = "oSquare.png";
+			this.src = "ttt/oSquare.png";
 			this.state = 2;
 			turn = 1;
 		}
@@ -83,7 +81,7 @@ function checkWinner() {
 }
 
 
-//TODO function that resets the game
+//function that resets the game
 function resetGame() {
 	
 	
@@ -117,27 +115,27 @@ function resetGame() {
 	message.className = "def";
 }
 
-//TODO function that changes image based on state
+//function that changes image based on state
 function changeStates() {
 	
 	//update square images
 	for (var i = 0; i < squares.length; i++) {
 		if (squares[i].state === 1) {
-			squares[i].src = 'xSquare.png';
+			squares[i].src = 'ttt/xSquare.png';
 			//console.log(selector);
 		} else if (squares[i].state === 2) {
-			squares[i].src = 'oSquare.png';
+			squares[i].src = 'ttt/oSquare.png';
 			//console.log(selector);
 		} else {
-			squares[i].src = 'blankSquare.png';
+			squares[i].src = 'ttt/blankSquare.png';
 		}
 	}
 	
 	//update selector image
 	if (turn === 1) {
-		selector.src = 'xSquare.png';
+		selector.src = 'ttt/xSquare.png';
 	} else {
-		selector.src = 'oSquare.png';
+		selector.src = 'ttt/oSquare.png';
 	}
 	
 	

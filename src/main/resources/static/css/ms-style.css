@@ -1,0 +1,9 @@
+@charset "ISO-8859-1";
+
+.square {
+	width:25px;
+}
+
+#board {
+	margin-bottom: 40px;
+}

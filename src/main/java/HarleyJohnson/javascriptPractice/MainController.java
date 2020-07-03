@@ -20,5 +20,11 @@ public class MainController {
 		
 		return "tic-tac-toe";
 	}
+	
+	@RequestMapping("/Minesweeper")
+	public String mineSweeper(Model model) {
+		
+		return "minesweeper";
+	}
 
 }
