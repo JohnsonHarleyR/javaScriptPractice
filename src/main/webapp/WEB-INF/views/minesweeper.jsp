@@ -15,7 +15,7 @@
 <meta charset="ISO-8859-1">
 <title>Minesweeper</title>
 </head>
-<body>
+<body id="body">
 
 <!-- Header -->
 <section class="header">
@@ -29,33 +29,24 @@
 	<a href="/">Go Back</a>
 </div>
 
-<c:set var="rows" value="16"/>
-<c:set var="cols" value="16"/>
-
 <h1 id="title">Minesweeper</h1>
 
-<table id="board">
-	<tr id="head"></tr>
-	
-	<c:set var="rcount" value="1"/>
-	<c:set var="ccount" value="1"/>
-	<c:forEach var="row" begin="0" end="${rows}">
-		<tr id="row${rcount}">
-			<c:forEach var="col" begin="0" end="${cols}">
-				<td id="${rcount}${ccount}">
-					<img class="square" id="s${rcount}${ccount}" src="ms/unclicked.png"/>
-				</td>
-				<c:set var="ccount" value="${ccount + 1}"/>
-			</c:forEach>
-		</tr>
-		<c:set var="rcount" value="${rcount + 1}"/>
-	</c:forEach>
-	
-</table>
+<div id="game">
+		<br>
+		<h2>Which level?</h2>
+		<button id="easy">Easy</button>
+		<button id="medium">Medium</button>
+		<button id="hard">Hard</button>
+		
+		
+
+	 
+	 
+</div>
+
 
 
 </main>
-
 <script src="js/ms-game.js"></script>
 </body>
 </html>

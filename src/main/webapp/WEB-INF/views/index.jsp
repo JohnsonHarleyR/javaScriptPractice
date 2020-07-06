@@ -13,7 +13,7 @@
 <link href="/style.css" rel="stylesheet" />
 
 <meta charset="ISO-8859-1">
-<title>Playing with Java</title>
+<title>Playing with JavaScript</title>
 </head>
 <body>
 
@@ -36,7 +36,7 @@
 Click these links to see different practice projects:
 <ul>
 	<li><a href="/TicTacToe">Tic Tac Toe</a></li>
-	<li><a href="/Minesweeper">Minesweeper</a> <i>(not finished)</i></li>
+	<li><a href="/minesweeper">Minesweeper</a> <i>(not finished)</i></li>
 	<!-- <li><a href=""></a></li> -->
 </ul>
 
