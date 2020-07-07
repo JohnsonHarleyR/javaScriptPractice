@@ -1,7 +1,38 @@
 //functions
-function loadPage() {
+function newGame() {
+	askLevel();
 	
+}
+
+function askLevel() {
+	main.innerHTML = "<div id='navigation'><a href='/'>Go Back</a></div>" +
+	"<h1 id='title'>Minesweeper</h1>";
 	
+	start = document.createElement("div");
+	game.id = "start";
+	game.innerHTML = "";
+	main.appendChild(start);
+	
+	console.log("Ask level");
+	start.innerHTML = "<h2>Which level?</h2>";
+	
+	easyBtn = document.createElement("button");
+	easyBtn.id = "easy";
+	easyBtn.innerHTML = "Easy";
+	easyBtn.addEventListener("click", setEasy);
+	start.appendChild(easyBtn);
+	
+	mediumBtn = document.createElement("button");
+	mediumBtn.id = "medium";
+	mediumBtn.innerHTML = "Medium";
+	mediumBtn.addEventListener("click", setMedium);
+	start.appendChild(mediumBtn);
+	
+	hardBtn = document.createElement("button");
+	hardBtn.id = "hard";
+	hardBtn.innerHTML = "Hard";
+	hardBtn.addEventListener("click", setHard);
+	start.appendChild(hardBtn);
 }
 
 function clickCell() {
@@ -9,8 +40,8 @@ function clickCell() {
 	//make sure cell is unclicked before doing anything
 	//if (!this.clicked) {
 		
-		console.log("clicked");
-		console.log("Value: " + this.getAttribute("value"));
+		//console.log("clicked");
+		//console.log("Value: " + this.getAttribute("value"));
 		
 		var url = "ms/empty.png";
 		
@@ -76,62 +107,24 @@ function checkSurrounding(row, col) {
 	}
 }
 
-//set level
-function setEasy() {
-	level = "easy";
-	rows = 10;
-	cols = 10;
-	numMines = 10;
-	newGame();
-	console.log("Easy level");
-}
-
-function setMedium() {
-	level = "medium";
-	rows = 16;
-	cols = 16;
-	numMines = 40;
-	newGame();
-	console.log("Medium level");
-}
-
-function setHard() {
-	level = "hard";
-	rows = 16;
-	cols = 30;
-	numMines = 99;
-	newGame();
-	console.log("Hard level");
-}
+//ask for the level
+//method to show level buttons to get the level again - use layout from newGame for squares
 
 //start the game
-function newGame() {
+function startGame() {
+
+	main.innerHTML = "<div id='navigation'><a href='/'>Go Back</a></div>" +
+	"<h1 id='title'>Minesweeper</h1>";
 	
-	grid = new Array(rows);
-	
-	//set up where all the mines are
-	
-	//first set them all to 0
-	for (var i = 0; i < rows; i++) {
-		grid[i] = new Array(cols);
-	}
-	for (var i = 0; i < rows; i++) {
-		for (var n = 0; n < cols; n++) {
-			grid[i][n] = 0;
-			//grid[i][n].src = "ms/unclicked.png";
-			//grid[i][n].clicked = false;
-			//grid[i][n].onclick = clickCell;
-		}
-	}
-	
+	game = document.createElement("table");
+	game.id = "game";
 	game.innerHTML = "";
+	main.appendChild(game);
 	
 	for (var r = 0; r < rows; r++) {
-		//var rowName = "r" + r;
 		var row = game.insertRow(r);
 		for (var c = 0; c < cols; c++) {
 			var cell = row.insertCell(c);
-			cell.value = grid[r][c];
 			cell.innerHTML = "<img class='square' src='" + "ms/unclicked.png" + "'/>";
 			cell.onclick = clickCell;
 			
@@ -142,24 +135,75 @@ function newGame() {
 		}
 		
 	}
+	
 	addMines();
+	
+	//Add button section
+	var buttons = document.createElement("div");
+	buttons.id = "buttons";
+	
+	main.appendChild(buttons);
+	
+	//Add new game button
+	newGameBtn = document.createElement("button");
+	newGameBtn.id = "new-game";
+	newGameBtn.innerHTML = "New Game";
+	newGameBtn.addEventListener("click", askLevel);
+	buttons.appendChild(newGameBtn);
 	
 }
 
 //set the mines
 function addMines() {
 	//now randomly place the mines based on the level
+	var alreadySet;
 	for (var i = 0; i < numMines; i++) {
-		var row = Math.floor(Math.random() * rows);
-		var col = Math.floor(Math.random() * cols);
+		do { //loop to prevent setting the same cell twice
+			alreadySet = false;
+			var row = Math.floor(Math.random() * rows);
+			var col = Math.floor(Math.random() * cols);
+			
+			var cell = game.rows[row].cells[col];
+			
+			if (cell.getAttribute("value") === "-1") {
+				alreadySet = true;
+			} else {
+				cell.setAttribute("value", "-1"); //-1 is a mine
+			}
+			//val.value = "-1"; 
+		} while (alreadySet);
 		
-		var cell = game.rows[row].cells[col];
-		cell.setAttribute("value", "-1"); //-1 is a mine
-		//val.value = "-1"; 
 	}
 	//now call function to set all surrounding values for all mines
 }
 
+//set level
+function setEasy() {
+	level = "easy";
+	rows = 10;
+	cols = 10;
+	numMines = 10;
+	startGame();
+	//console.log("Easy level");
+}
+
+function setMedium() {
+	level = "medium";
+	rows = 16;
+	cols = 16;
+	numMines = 40;
+	startGame();
+	//console.log("Medium level");
+}
+
+function setHard() {
+	level = "hard";
+	rows = 16;
+	cols = 30;
+	numMines = 99;
+	startGame();
+	//console.log("Hard level");
+}
 
 //Variables
 var level = "medium";
@@ -170,14 +214,15 @@ var numMines = 40;
 var easyBtn = document.getElementById('easy');
 var mediumBtn = document.getElementById('medium');
 var hardBtn = document.getElementById('hard');
+var newGameBtn;
 
-var grid;
 var cells;
 
 var body = document.getElementById('body');
-var game = document.getElementById('game');
-var start = document.getElementById('start');
-var play;
+var main = document.getElementById('main');
+var start;
+var game;
+var buttons;
 
 var cell = {
 	row: 0,
@@ -215,6 +260,8 @@ var cell = {
 
 
 //Event handlers
+//body.onload = loadPage;
+
 easyBtn.onclick = setEasy;
 mediumBtn.onclick = setMedium;
 hardBtn.onclick = setHard;
