@@ -31,18 +31,21 @@
 
 <h1 id="title">Minesweeper</h1>
 
-<div id="game">
-		<br>
+<br>
+<table id="game">
+		
+		<tr>
+		<td>
 		<h2>Which level?</h2>
 		<button id="easy">Easy</button>
 		<button id="medium">Medium</button>
 		<button id="hard">Hard</button>
+		</td>
+		</tr>
 		
-		
-
 	 
 	 
-</div>
+</table>
 
 
 

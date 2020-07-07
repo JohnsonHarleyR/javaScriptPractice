@@ -4,6 +4,78 @@ function loadPage() {
 	
 }
 
+function clickCell() {
+	
+	//make sure cell is unclicked before doing anything
+	//if (!this.clicked) {
+		
+		console.log("clicked");
+		console.log("Value: " + this.getAttribute("value"));
+		
+		var url = "ms/empty.png";
+		
+		//change the image according to the value
+		switch (this.getAttribute("value")) {
+		case "-1":
+			url = "ms/mine.png";
+			//game over - TODO add a function
+			break;
+		case "0":
+			url = "ms/empty.png";
+			break;
+		case "1":
+			url = "ms/c1.png";
+			break;
+		case "2":
+			url = "ms/c2.png";
+			break;
+		case "3":
+			url = "ms/c3.png";
+			break;
+		case "4":
+			url = "ms/c4.png";
+			break;
+		case "5":
+			url = "ms/c5.png";
+			break;
+		case "6":
+			url = "ms/c6.png";
+			break;
+		case "7":
+			url = "ms/c7.png";
+			break;
+		case "8":
+			url = "ms/c8.png";
+			break;
+		}
+		//set html
+		this.innerHTML = "<img class='square' src='" + url + "'/>";
+		
+		//this.clicked = true; //keep this at the end of the if statement
+	//}
+	
+}
+
+//store how many mines are touching a cell
+function checkSurrounding(row, col) {
+	//there are up to 8 surrounding cells, so the for loop will go 8 times
+	var times = 0;
+	var xs = [row - 1, row, row + 1];
+	var ys = [col - 1, col, col + 1];
+	
+	for (var x = 0; x < xs.length; x++) {
+		for (var y = 0; y < ys.length; y++) {
+			//make sure cell is not less than 0 or over the max
+			if (xs[x] == row && ys[y] == col) {
+				//nothing actually happens, nothing should get added if it's the original cell
+				//if the original is a mine though, then set that board image to mine
+				
+			}
+		}
+		
+	}
+}
+
 //set level
 function setEasy() {
 	level = "easy";
@@ -46,45 +118,47 @@ function newGame() {
 	for (var i = 0; i < rows; i++) {
 		for (var n = 0; n < cols; n++) {
 			grid[i][n] = 0;
+			//grid[i][n].src = "ms/unclicked.png";
+			//grid[i][n].clicked = false;
+			//grid[i][n].onclick = clickCell;
 		}
 	}
 	
-	//now randomly place the mines based on the level
-	for (var i = 0; i < numMines; i++) {
-		var x = Math.floor(Math.random() * rows);
-		var y = Math.floor(Math.random() * cols);
-		//this will now be a mine. Set mines to 1, grid to -1 (represents mine,
-		//so mines may not even be necessary... Let's not count it
-		grid[x][y] = -1;
-	}
+	game.innerHTML = "";
 	
-	
-	//set up the HTML for the table
-	play = "<table id='board'>" +
-		"<tr id='head'></tr>";
-	
-	//the first 'for loop' is for the rows - use javascript, not core
 	for (var r = 0; r < rows; r++) {
-		var rowName = "r" + r;
-		play += "<tr id='" + rowName + "'>";
-			for (var c = 0; c < cols; c++) {
-				play += "<td id='" + r + "-" + c + "'>";
-					play += "<img class='square' id='" + r + "-" + c + "'  src='ms/unclicked.png'/>";
-				play += "</td>"
-			}
-		play += "</tr>"
-	}
-	
-	play += "</table>"
+		//var rowName = "r" + r;
+		var row = game.insertRow(r);
+		for (var c = 0; c < cols; c++) {
+			var cell = row.insertCell(c);
+			cell.value = grid[r][c];
+			cell.innerHTML = "<img class='square' src='" + "ms/unclicked.png" + "'/>";
+			cell.onclick = clickCell;
+			
+			var val = document.createAttribute("value", "0");
+		    cell.setAttributeNode(val);
+		    val.value = "0";
+		    cell.id = r + "-" + c;
+		}
 		
-	
-	game.innerHTML = play;
-	
-	
+	}
+	addMines();
 	
 }
 
 //set the mines
+function addMines() {
+	//now randomly place the mines based on the level
+	for (var i = 0; i < numMines; i++) {
+		var row = Math.floor(Math.random() * rows);
+		var col = Math.floor(Math.random() * cols);
+		
+		var cell = game.rows[row].cells[col];
+		cell.setAttribute("value", "-1"); //-1 is a mine
+		//val.value = "-1"; 
+	}
+	//now call function to set all surrounding values for all mines
+}
 
 
 //Variables
@@ -97,8 +171,8 @@ var easyBtn = document.getElementById('easy');
 var mediumBtn = document.getElementById('medium');
 var hardBtn = document.getElementById('hard');
 
-var g;
 var grid;
+var cells;
 
 var body = document.getElementById('body');
 var game = document.getElementById('game');
@@ -144,4 +218,5 @@ var cell = {
 easyBtn.onclick = setEasy;
 mediumBtn.onclick = setMedium;
 hardBtn.onclick = setHard;
+
 
