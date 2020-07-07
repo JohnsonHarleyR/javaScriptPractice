@@ -38,7 +38,7 @@
 Click these links to see different practice projects:
 <ul>
 	<li><a href="/TicTacToe">Tic Tac Toe</a></li>
-	<li><a href="/minesweeper">Minesweeper</a> <i>(not finished)</i></li>
+	<li><a href="/minesweeper">Minesweeper</a><!--  <i>(not finished)</i>--> </li>
 	<!-- <li><a href=""></a></li> -->
 </ul>
 
