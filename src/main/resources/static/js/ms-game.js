@@ -88,23 +88,63 @@ function clickCell() {
 }
 
 //store how many mines are touching a cell
-function checkSurrounding(row, col) {
-	//there are up to 8 surrounding cells, so the for loop will go 8 times
-	var times = 0;
-	var xs = [row - 1, row, row + 1];
-	var ys = [col - 1, col, col + 1];
+function setValues() {
+	console.log("setting cells");
 	
-	for (var x = 0; x < xs.length; x++) {
-		for (var y = 0; y < ys.length; y++) {
-			//make sure cell is not less than 0 or over the max
-			if (xs[x] == row && ys[y] == col) {
-				//nothing actually happens, nothing should get added if it's the original cell
-				//if the original is a mine though, then set that board image to mine
+	for (var row = 0; row < rows; row++) {
+		for (var col = 0; col < cols; col++) {
+			
+			//there are up to 8 surrounding cells, so the for loop will go 8 times
+			var times = 0;
+			var cell = game.rows[row].cells[col];
+			console.log("cell: " + cell.id);
+			
+			var xs = [row - 1, row, row + 1];
+			var ys = [col - 1, col, col + 1];
+			
+			for (var x = 0; x < xs.length; x++) {
+				for (var y = 0; y < ys.length; y++) {
+					//make sure cell is not less than 0 or over the max
+					if (xs[x] == row && ys[y] == col) {
+						//nothing actually happens, nothing should get added if it's the original cell
+						//it is done this way to simplify things
+					} else {
+						//if any of the numbers are below or above the limit, correct them
+						if (xs[x] < 0) {
+							xs[x] = 0;
+						}
+						if (xs[x] >= rows) {
+							xs[x] = rows - 1;
+						}
+						if (ys[y] < 0) {
+							ys[y] = 0;
+						}
+						if (ys[y] >= cols) {
+							ys[y] = cols - 1;
+						}
+						//now check if the cell is a mine
+						//get the cell
+						var ce = game.rows[xs[x]].cells[ys[y]];
+						console.log("touching cell: " + ce.id);
+						if (ce.getAttribute('value') === "-1") {
+							times++;
+						}
+							
+					}
+				}
 				
 			}
+			console.log("mines touching: " + times);
+			//now store the number of times in the cell as the value
+			if (cell.getAttribute('value') !== "-1") {
+				cell.setAttribute('value', times + "");
+			}
+			
+			
 		}
-		
 	}
+	
+	
 }
 
 //ask for the level
@@ -131,12 +171,28 @@ function startGame() {
 			var val = document.createAttribute("value", "0");
 		    cell.setAttributeNode(val);
 		    val.value = "0";
+		    var ro = document.createAttribute("r", r + "");
+		    cell.setAttributeNode(ro);
+		    ro.value = r + "";
+		    var co = document.createAttribute("c", c + "");
+		    cell.setAttributeNode(co);
+		    co.value = c + "";
 		    cell.id = r + "-" + c;
 		}
 		
 	}
 	
 	addMines();
+	setValues();
+	
+	//set cell values
+	/*for (var r = 0; r < rows; r++) {
+		for (var c = 0; c < cols; c++) {
+			var ce = game.rows[r].cells[c];
+			console.log("ce: " + ce.getAttribute('value'));
+			ce.setCell;
+		}
+	}*/
 	
 	//Add button section
 	var buttons = document.createElement("div");
@@ -150,6 +206,8 @@ function startGame() {
 	newGameBtn.innerHTML = "New Game";
 	newGameBtn.addEventListener("click", askLevel);
 	buttons.appendChild(newGameBtn);
+	
+	
 	
 }
 
@@ -174,7 +232,6 @@ function addMines() {
 		} while (alreadySet);
 		
 	}
-	//now call function to set all surrounding values for all mines
 }
 
 //set level
@@ -224,39 +281,7 @@ var start;
 var game;
 var buttons;
 
-var cell = {
-	row: 0,
-	col: 0,
-	value: 0, //mine equals -1
-	mine: false,
-	clicked: false,
-	src: "ms/unclicked.png",
 
-	//cell functions
-	checkAvailability: function setRow(row) {
-		this.row = row;
-	},
-	
-	checkAvailability: function setCol(col) {
-		this.col = col;
-	},
-	
-	checkAvailability: function setMine(mine) {
-		this.mine = mine;
-	},
-	
-	checkAvailability: function setClicked(clicked) {
-		this.clicked = clicked;
-	},
-	
-	checkAvailability: function setSrc(src) {
-		this.src = src;
-	},
-	
-	checkAvailability: function setValue(value) {
-		this.value = value;
-	}
-};
 
 
 //Event handlers
