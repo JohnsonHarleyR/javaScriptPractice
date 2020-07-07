@@ -98,7 +98,7 @@ function clickCell() {
 //if a cell is blank, uncover the surrounding cells too. - does not ensure it's blank
 function uncoverAround(r, c, uncoverNext) {
 	
-	console.log("# of rows: " + rows + " # of cols: " + cols);
+	//console.log("# of rows: " + rows + " # of cols: " + cols);
 	
 	var row = Number(r);
 	var col = Number(c);
@@ -118,7 +118,7 @@ function uncoverAround(r, c, uncoverNext) {
 	var surCells = new Array(); //using this should help make the function run faster
 								//Because it eliminates extra double looping
 	
-	console.log("Surrounding cells: ");
+	//console.log("Surrounding cells: ");
 	
 	for (var x = 0; x < xs.length; x++) {
 		for (var y = 0; y < ys.length; y++) {
@@ -128,11 +128,11 @@ function uncoverAround(r, c, uncoverNext) {
 			if (xs[x] === row && ys[y] === col) {
 				//nothing actually happens, nothing should get added if it's the original cell
 				//it is done this way to simplify things
-				console.log("This is the same original cell...");
+				//console.log("This is the same original cell...");
 				addIt = false;
 			} else {
 				
-				console.log("row: " + xs[x] + " col: " + ys[y]);
+				//console.log("row: " + xs[x] + " col: " + ys[y]);
 				r = xs[x];
 				c = ys[y];
 				
@@ -153,20 +153,14 @@ function uncoverAround(r, c, uncoverNext) {
 					c = cols - 1;
 					addIt = false;
 				}
-				console.log("After fix - row: " + r + " col: " + c);
+				//console.log("After fix - row: " + r + " col: " + c);
 				//loop through surCells to make sure there are no repeats
 				for (var i = 0; i < surCells.length; i++) {
-					
-					//save memory by also checking if that cell is already uncovered
-					if (surCells[i].getAttribute('src') !== "ms/unclicked.png") {
-						console.log("Already clicked so skip this cell...");
-						addIt = false;
-					}
 					
 					//check for same coordinates
 					if (Number(surCells[i].getAttribute('r')) === r &&
 							Number(surCells[i].getAttribute('c')) === c) {
-						console.log("Already in surrounding cells...");
+						//console.log("Already in surrounding cells...");
 						addIt = false;
 					}
 					
@@ -182,8 +176,15 @@ function uncoverAround(r, c, uncoverNext) {
 			//if addIt
 			if (addIt) {
 				var tempCell = game.rows[r].cells[c];
-				console.log("Adding it to surrounding cell list...");
-				surCells.push(tempCell);
+				
+				//save memory by also checking if that cell is already uncovered
+				if (tempCell.getAttribute('src') === "ms/unclicked.png") {
+					//console.log("Adding it to surrounding cell list...");
+					surCells.push(tempCell);
+				} else {
+					//console.log("Already clicked so skip this cell...");
+				}
+				
 			}
 			
 		}
@@ -193,13 +194,13 @@ function uncoverAround(r, c, uncoverNext) {
 	
 	//now loop through it again, uncovering each cell.
 	console.log("");
-	console.log("now uncovering these surrounding cells...");
+	console.log("now uncovering surrounding cells...");
 	
 	for (var i = 0; i < surCells.length; i ++) {
 		var cell = surCells[i];
-		console.log("Cell: " + "row " + cell.getAttribute('r') + ", col " + cell.getAttribute('c'));
+		//console.log("Cell: " + "row " + cell.getAttribute('r') + ", col " + cell.getAttribute('c'));
 		var tUrl = getImageUrl(cell.getAttribute('value'));
-		console.log("New src: " + tUrl);
+		//console.log("New src: " + tUrl);
 		cell.innerHTML = "<img class='square' src='" + tUrl + "'/>";
 		cell.setAttribute("src", tUrl);
 		
@@ -208,24 +209,26 @@ function uncoverAround(r, c, uncoverNext) {
 	
 	//COME BACK TO THIS
 	
-	if (uncoverNext) {
+	if (uncoverNext) { //this boolean helps prevent memory problems during testing
 		//now loop through it again, uncovering each cell.
 		console.log("");
 		console.log("Now doing the same for newly uncovered blank cells...");
 		
 		var uncoverCells = new Array();
 		
-		console.log("List of cells to also uncover around: ");
+		//console.log("List of cells to also uncover around: ");
 		for (var i = 0; i < surCells.length; i ++) {
 			if (surCells[i].getAttribute('value') === '0') {
-				console.log("Cell " + surCells[i].id);
+				//console.log("Cell " + surCells[i].id);
 				uncoverCells.push(surCells[i]);
 			}
 		}
 		
 		//now call function to uncover these cells recursively
-		console.log("Uncovering around these cells as well.");
-		checkNewBlanks(uncoverCells, false); //boolean is to help with testing
+		//console.log("Uncovering around these cells as well.");
+		//console.log("");
+		checkNewBlanks(uncoverCells, true); //boolean is to help with testing
+											//false keeps it from repeating the loop continuously
 	}
 	
 }
@@ -255,9 +258,10 @@ function checkNewBlanks(cells, uncoverNext) {
 		var r = cell.getAttribute('r');
 		var c = cell.getAttribute('c');
 		
-		console.log("Uncovering around " + cell.id);
+		//console.log("Uncovering around " + cell.id);
 		uncoverAround(r, c, uncoverNext);
 		console.log("Done uncovering around that cell...");
+		console.log("");
 	}
 }
 
