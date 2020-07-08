@@ -23,31 +23,17 @@ public class MainController {
 	}
 	
 	@RequestMapping("/minesweeper")
-	public String mineSweeper(
-			//@RequestParam(name = "level", required = false) String l,
-			//@RequestParam(name = "show", required = false) int s,
-			Model model) {
+	public String mineSweeper(Model model) {
 		
-		//String level;
-		//int show;;
-		
-		
-		/*try {
-			level = l;
-		} catch (Exception e) {
-			level = "medium"; //medium is default
-		}
-		
-		try {
-			show = s;
-		} catch (Exception e) {
-			show = 1; //1 is default, it takes the user to the "select level" showing
-		}
-		
-		model.addAttribute("level", level);
-		model.addAttribute("show", show);*/
 		
 		return "minesweeper";
+	}
+	
+	@RequestMapping("/roadside-bingo")
+	public String roadsideBingo(Model model) {
+		
+		
+		return "roadside-bingo";
 	}
 
 }

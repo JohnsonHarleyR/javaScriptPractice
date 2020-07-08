@@ -10,12 +10,10 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
 	crossorigin="anonymous">
-<!-- 
 <link href="/style.css" rel="stylesheet" />
- -->
 
 <meta charset="ISO-8859-1">
-<title>Playing with JavaScript</title>
+<title>Roadside Bingo</title>
 </head>
 <body>
 
@@ -27,22 +25,13 @@
 <!-- MainBody -->
 <main class="container">
 
-<h1>Practicing with JavaScript</h1>
-<p>
-<i><sup>All projects are created by Harley Johnson. 
-(<a href="https://www.linkedin.com/in/johnsonharleyr">LinkedIn</a> / 
-<a href="https://github.com/JohnsonHarleyR">GitHub</a>)</sup></i>
-</p>
+<div id="navigation">
+	<a href="/">Go Back</a>
+</div>
 
-
-Click these links to see different practice projects:
-<ul>
-	<li><a href="/TicTacToe">Tic Tac Toe</a></li>
-	<li><a href="/minesweeper">Minesweeper</a><!--  <i>(not finished)</i>--> </li>
-	<li><a href="/roadside-bingo">Roadside Bingo</a> <i>(not finished)</i></li>
-	<!-- <li><a href=""></a></li> -->
-</ul>
-
+<h1>Roadside Bingo</h1>
+The start of a project for my mom.<br>
+I hope to either develop this into an android app or a realtime web game.
 
 </main>
 
