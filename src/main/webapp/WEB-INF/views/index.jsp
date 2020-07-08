@@ -31,7 +31,7 @@
 <p>
 <i><sup>All projects are created by Harley Johnson. 
 (<a href="https://www.linkedin.com/in/johnsonharleyr">LinkedIn</a> / 
-<a href="https://github.com/JohnsonHarleyR">GitHub</a>)</sup></i>
+<a href="https://github.com/JohnsonHarleyR/javaScriptPractice">GitHub</a>)</sup></i>
 </p>
 
 
