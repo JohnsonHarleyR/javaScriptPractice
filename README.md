@@ -1,5 +1,10 @@
 # JavaScript Practice
 Practice as I teach myself JavaScript.
+<br>
+<br>
+<b>This repo has moved <a href="https://github.com/JohnsonHarleyR/JSGamesAndPractice">here</a>.</b>
+
+
 <br><br>
 The important files can be found by navigating to src/main/.<br>
 Then look under resources/static/js to find the JavaScript files, or look under webapp/WEB-INF/views to find the HTML/JSP pages.
